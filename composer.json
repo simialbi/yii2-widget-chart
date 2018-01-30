@@ -25,7 +25,8 @@
 		"yiisoft/yii2": "~2.0",
 		"yiisoft/yii2-bootstrap": "~2.0",
 		"simialbi/yii2-simialbi-base": "*",
-		"npm-asset/chartist": "*"
+		"npm-asset/chartist": "*",
+		"npm-asset/chartist-plugin-legend": "*"
 	},
 	"config": {
 		"process-timeout": 1800

@@ -9,7 +9,9 @@ namespace simialbi\yii2\chart;
 use simialbi\yii2\widgets\Widget;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Html;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\web\JsExpression;
 
 /**
  * This widget is an Implementation of chartist.js for yii2 framework ([[http://gionkunz.github.io/chartist-js/]])
@@ -96,6 +98,16 @@ class Chart extends Widget {
 	public $responsiveOptions = [];
 
 	/**
+	 * @var boolean Wheter to show chart legend or not. (defaults to false)
+	 */
+	public $legend = false;
+
+	/**
+	 * @var array Legend plugin options ([[https://github.com/CodeYellowBV/chartist-plugin-legend]])
+	 */
+	public $legendOptions = [];
+
+	/**
 	 * @inheritdoc
 	 */
 	public function init() {
@@ -148,6 +160,12 @@ class Chart extends Widget {
 		$id   = $this->options['id'];
 
 		ChartAsset::register($view);
+
+		if ($this->legend) {
+			$this->clientOptions = ArrayHelper::merge($this->clientOptions, [
+				'plugins' => [new JsExpression('Chartist.plugins.legend('.Json::htmlEncode($this->legendOptions).')')]
+			]);
+		}
 
 		$js = "new Chartist.{$this->type}('#$id', ".Json::htmlEncode([
 				'labels' => $this->labels,

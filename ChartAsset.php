@@ -18,20 +18,21 @@ class ChartAsset extends AssetBundle {
 	/**
 	 * @var string the directory that contains the source asset files for this asset bundle.
 	 */
-	public $sourcePath = '@npm/chartist/dist';
+	public $sourcePath = '@npm';
 
 	/**
 	 * @var array list of CSS files that this bundle contains.
 	 */
 	public $css = [
-		'chartist.min.css'
+		'chartist/dist/chartist.min.css'
 	];
 
 	/**
 	 * @var array list of JavaScript files that this bundle contains.
 	 */
 	public $js = [
-		'chartist.min.js'
+		'chartist/dist/chartist.min.js',
+		'chartist-plugin-legend/chartist-plugin-legend.js'
 	];
 
 	/**
@@ -46,6 +47,10 @@ class ChartAsset extends AssetBundle {
 	 * is being published.
 	 */
 	public $publishOptions = [
+		'only' => [
+			'chartist/dist/*',
+			'chartist-plugin-legend/chartist-plugin-legend.js'
+		],
 		'forceCopy' => YII_DEBUG
 	];
 }
