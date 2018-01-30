@@ -122,6 +122,7 @@ class Chart extends Widget {
 	 * @inheritdoc
 	 */
 	public function run() {
+		Html::addCssClass($this->options, 'sa-widget-chart');
 		$container = Html::tag('div', '', $this->options);
 
 		$this->registerPlugin();
