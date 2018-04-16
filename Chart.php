@@ -8,8 +8,8 @@ namespace simialbi\yii2\chart;
 
 use simialbi\yii2\widgets\Widget;
 use yii\base\InvalidConfigException;
-use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\JsExpression;
 
@@ -108,7 +108,8 @@ class Chart extends Widget {
 	public $legendOptions = [];
 
 	/**
-	 * @inheritdoc
+	 * {@inheritdoc}
+	 * @throws InvalidConfigException
 	 */
 	public function init() {
 		if (empty($this->labels) || empty($this->series)) {
