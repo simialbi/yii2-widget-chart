@@ -172,7 +172,7 @@ class Chart extends Widget {
 		$js = "var chart = new Chartist.{$this->type}('#$id', ".Json::htmlEncode([
 				'labels' => $this->labels,
 				'series' => $this->series
-			]).", ".Json::htmlEncode($this->clientOptions).", ".Json::htmlEncode($this->responsiveOptions).")";
+			]).", ".Json::htmlEncode($this->clientOptions).", ".Json::htmlEncode($this->responsiveOptions).");";
 
 		$view->registerJs($js);
 
