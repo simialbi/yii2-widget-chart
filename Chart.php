@@ -120,7 +120,7 @@ class Chart extends Widget {
 	}
 
 	/**
-	 * @inheritdoc
+	 * {@inheritdoc}
 	 */
 	public function run() {
 		Html::addCssClass($this->options, 'sa-widget-chart');
@@ -155,7 +155,7 @@ class Chart extends Widget {
 	}
 
 	/**
-	 * @inheritdoc
+	 * {@inheritdoc}
 	 */
 	protected function registerPlugin($pluginName = null) {
 		$view = $this->view;
@@ -169,11 +169,26 @@ class Chart extends Widget {
 			]);
 		}
 
-		$js = "new Chartist.{$this->type}('#$id', ".Json::htmlEncode([
+		$js = "var chart = new Chartist.{$this->type}('#$id', ".Json::htmlEncode([
 				'labels' => $this->labels,
 				'series' => $this->series
 			]).", ".Json::htmlEncode($this->clientOptions).", ".Json::htmlEncode($this->responsiveOptions).")";
 
 		$view->registerJs($js);
+
+		$this->registerClientEvents();
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function registerClientEvents() {
+		if (!empty($this->clientEvents)) {
+			$js = [];
+			foreach ($this->clientEvents as $event => $handler) {
+				$js[] = "chart.on('$event', $handler);";
+			}
+			$this->view->registerJs(implode("\n", $js));
+		}
 	}
 }
