@@ -10,6 +10,7 @@ use simialbi\yii2\widgets\Widget;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 use yii\helpers\Json;
 use yii\web\JsExpression;
 
@@ -59,27 +60,22 @@ class Chart extends Widget {
 	 * Pie chart type constant
 	 */
 	const TYPE_PIE = 'Pie';
-
 	/**
 	 * @var array Allowed chart types
 	 */
 	protected $allowedTypes = [self::TYPE_LINE, self::TYPE_BAR, self::TYPE_PIE];
-
 	/**
 	 * @var string Chart type (one of class [[TYPE_*]] constants)
 	 */
 	private $_type = self::TYPE_LINE;
-
 	/**
 	 * @var string[] Chart labels (x-axis). (required)
 	 */
 	public $labels;
-
 	/**
 	 * @var array Chart data with series to use in chart. (required)
 	 */
 	public $series;
-
 	/**
 	 * @var array Specify an array of responsive option arrays which are a media query and options object pair
 	 *
@@ -96,12 +92,10 @@ class Chart extends Widget {
 	 * ```
 	 */
 	public $responsiveOptions = [];
-
 	/**
 	 * @var boolean Wheter to show chart legend or not. (defaults to false)
 	 */
 	public $legend = false;
-
 	/**
 	 * @var array Legend plugin options ([[https://github.com/CodeYellowBV/chartist-plugin-legend]])
 	 */
@@ -140,7 +134,7 @@ class Chart extends Widget {
 	 */
 	public function setType($type) {
 		if (!in_array($this->_type, $this->allowedTypes)) {
-			throw new InvalidConfigException("Type must be one of the following: ".implode(', ', $this->allowedTypes));
+			throw new InvalidConfigException("Type must be one of the following: " . implode(', ', $this->allowedTypes));
 		}
 		$this->_type = $type;
 	}
@@ -160,19 +154,20 @@ class Chart extends Widget {
 	protected function registerPlugin($pluginName = null) {
 		$view = $this->view;
 		$id   = $this->options['id'];
+		$var  = Inflector::variablize('chart' . $id);
 
 		ChartAsset::register($view);
 
 		if ($this->legend) {
 			$this->clientOptions = ArrayHelper::merge($this->clientOptions, [
-				'plugins' => [new JsExpression('Chartist.plugins.legend('.Json::htmlEncode($this->legendOptions).')')]
+				'plugins' => [new JsExpression('Chartist.plugins.legend(' . Json::htmlEncode($this->legendOptions) . ')')]
 			]);
 		}
 
-		$js = "var chart = new Chartist.{$this->type}('#$id', ".Json::htmlEncode([
+		$js = "var $var = new Chartist.{$this->type}('#$id', " . Json::htmlEncode([
 				'labels' => $this->labels,
 				'series' => $this->series
-			]).", ".Json::htmlEncode($this->clientOptions).", ".Json::htmlEncode($this->responsiveOptions).");";
+			]) . ", " . Json::htmlEncode($this->clientOptions) . ", " . Json::htmlEncode($this->responsiveOptions) . ");";
 
 		$view->registerJs($js);
 
@@ -183,10 +178,13 @@ class Chart extends Widget {
 	 * {@inheritdoc}
 	 */
 	protected function registerClientEvents() {
+		$id  = $this->options['id'];
+		$var = Inflector::variablize('chart' . $id);
+
 		if (!empty($this->clientEvents)) {
 			$js = [];
 			foreach ($this->clientEvents as $event => $handler) {
-				$js[] = "chart.on('$event', $handler);";
+				$js[] = "$var.on('$event', $handler);";
 			}
 			$this->view->registerJs(implode("\n", $js));
 		}
