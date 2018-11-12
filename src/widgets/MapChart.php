@@ -9,6 +9,7 @@ namespace simialbi\yii2\chart\widgets;
 
 use simialbi\yii2\chart\models\map\Projection;
 use simialbi\yii2\chart\models\Series;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\helpers\Json;
 
@@ -19,7 +20,7 @@ class MapChart extends Chart
      */
     public $geodata = 'worldLow';
     /**
-     * @var Series|null A series is represented by a series class. If not defined, it will be auto created by data.
+     * @var Series|Series[]|null A series is represented by a series class. If not defined, it will be auto created by data.
      */
     public $series;
 
@@ -55,8 +56,15 @@ class MapChart extends Chart
         }
 
         if ($this->series) {
-            $js .= "var {$this->series->varName} = " . (string)$this->series . ";";
-            $js .= "$var.series.push({$this->series->varName});";
+
+            if (ArrayHelper::isAssociative($this->series)) {
+                $this->series = [$this->series];
+            }
+
+            foreach ($this->series as $series) {
+                $js .= "var {$series->varName} = " . (string)$series . ";";
+                $js .= "$var.series.push({$series->varName});";
+            }
         }
 
         $this->view->registerJs($js);
