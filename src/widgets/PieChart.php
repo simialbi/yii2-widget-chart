@@ -30,7 +30,8 @@ class PieChart extends Chart
         parent::init();
 
         if (ArrayHelper::isAssociative($this->data, false)) {
-            throw new InvalidConfigException(Yii::t('simialbi/chart/line', 'The "data" property must be an array of objects'));
+            throw new InvalidConfigException(Yii::t('simialbi/chart/line',
+                'The "data" property must be an array of objects'));
         }
         if (empty($this->series)) {
             $this->generateSeries();
@@ -49,6 +50,12 @@ class PieChart extends Chart
 
         $js = "var $var = am4core.create('$id', am4charts.PieChart);\n";
         $js .= "$var.data = $data;\n";
+
+        foreach ($this->clientOptions as $key => $value) {
+            if (is_string($key)) {
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ";";
+            }
+        }
 
         $js .= "var {$this->series->varName} = " . (string)$this->series . ";";
         $js .= "$var.series.push({$this->series->varName});";

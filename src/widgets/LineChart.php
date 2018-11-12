@@ -65,6 +65,13 @@ class LineChart extends Chart
 
         $js = "var $var = am4core.create('$id', am4charts.XYChart);\n";
         $js .= "$var.data = $data;\n";
+
+        foreach ($this->clientOptions as $key => $value) {
+            if (is_string($key)) {
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ";";
+            }
+        }
+
         foreach ($this->axes as $axis) {
             $js .= "var {$axis->varName} = " . (string)$axis . ";";
             if ($axis instanceof CategoryAxis) {
