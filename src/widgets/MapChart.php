@@ -56,8 +56,7 @@ class MapChart extends Chart
         }
 
         if ($this->series) {
-
-            if (ArrayHelper::isAssociative($this->series)) {
+            if (is_object($this->series) || ArrayHelper::isAssociative($this->series)) {
                 $this->series = [$this->series];
             }
 
