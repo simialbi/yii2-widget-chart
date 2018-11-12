@@ -35,11 +35,9 @@
   "require-dev": {
     "php": ">=7.0",
     "yiisoft/yii2-coding-standards": "~2.0",
-    "phpunit/phpunit": "*",
-    "npm-asset/amcharts--amcharts4-geodata": "^4.0.18"
+    "phpunit/phpunit": "*"
   },
   "suggest": {
-    "npm-asset/amcharts--amcharts4-geodata": "for usage of map charts"
   },
   "config": {
     "process-timeout": 1800
