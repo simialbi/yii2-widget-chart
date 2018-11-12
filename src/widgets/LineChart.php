@@ -6,11 +6,11 @@
 
 namespace simialbi\yii2\chart\widgets;
 
-use simialbi\yii2\chart\base\Axis;
-use simialbi\yii2\chart\base\axis\CategoryAxis;
-use simialbi\yii2\chart\base\axis\ValueAxis;
-use simialbi\yii2\chart\base\Series;
-use simialbi\yii2\chart\base\series\ColumnSeries;
+use simialbi\yii2\chart\models\Axis;
+use simialbi\yii2\chart\models\axis\CategoryAxis;
+use simialbi\yii2\chart\models\axis\ValueAxis;
+use simialbi\yii2\chart\models\Series;
+use simialbi\yii2\chart\models\series\ColumnSeries;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
@@ -35,13 +35,15 @@ class LineChart extends Chart
 
     /**
      * {@inheritdoc}
+     * @throws InvalidConfigException
      */
     public function init()
     {
         parent::init();
 
         if (ArrayHelper::isAssociative($this->data, false)) {
-            throw new InvalidConfigException(Yii::t('simialbi/chart/line', 'The "data" property must be an array of objects'));
+            throw new InvalidConfigException(Yii::t('simialbi/chart/line',
+                'The "data" property must be an array of objects'));
         }
         if (empty($this->axes)) {
             $this->generateAxes();
@@ -58,14 +60,24 @@ class LineChart extends Chart
     {
         ChartAsset::register($this->view);
         $id = $this->options['id'];
-        $var = Inflector::variablize('chart' . $id);
+        $var = Inflector::variablize('chart_' . $id);
         $data = Json::htmlEncode($this->data);
 
+        $js = "var $var = am4core.create('$id', am4charts.XYChart);\n";
+        $js .= "$var.data = $data;\n";
+        foreach ($this->axes as $axis) {
+            $js .= "var {$axis->varName} = " . (string)$axis . ";";
+            if ($axis instanceof CategoryAxis) {
+                $js .= "$var.xAxes.push({$axis->varName});\n";
+            } else {
+                $js .= "$var.yAxes.push({$axis->varName});\n";
+            }
+        }
 
-        $js = <<<JS
-var $var = am4core.create('$id', am4charts.XYChart);
-JS;
+        $js .= "var {$this->series->varName} = " . (string)$this->series . ";";
+        $js .= "$var.series.push({$this->series->varName});";
 
+        $this->view->registerJs($js);
     }
 
     /**
@@ -93,7 +105,9 @@ JS;
      */
     protected function generateSeries()
     {
-        $this->series = new ColumnSeries();
+        $this->series = new ColumnSeries([
+            'dataFields' => []
+        ]);
 
         foreach ($this->data[0] as $key => $value) {
             if (is_numeric($value)) {

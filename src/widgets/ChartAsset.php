@@ -34,7 +34,7 @@ class ChartAsset extends AssetBundle
      */
     public $js = [
         'core.js',
-        'chart.js'
+        'charts.js'
     ];
 
     /**
@@ -66,9 +66,14 @@ class ChartAsset extends AssetBundle
             $this->theme = 'animated';
         }
         ArrayHelper::setValue($this->js, 'theme', 'themes/' . $this->theme . '.js');
-        ArrayHelper::setValue($this->js, 'theme', 'themes/' . $this->theme . '.js');
 
-        Yii::$app->view->registerJs("am4core.useTheme(am4themes_{$this->theme});", View::POS_READY, 'sa-chart-theme');
+        $language = str_replace('-', '_', Yii::$app->language);
+        $langFile = Yii::getAlias($this->sourcePath . '/lang/' . $language . '.js');
+        if (file_exists($langFile)) {
+            $this->js[] = 'lang/' . $language . '.js';
+        }
+
+        Yii::$app->view->registerJs("am4core.useTheme(am4themes_{$this->theme});\n", View::POS_READY, 'sa-chart-theme');
 
         parent::init();
     }

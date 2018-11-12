@@ -1,9 +1,9 @@
 # yii2-widget-chart
-Wrapper for [CHARTIST.JS](http://gionkunz.github.io/chartist-js/index.html) library.
+Wrapper for [amcharts4](https://www.amcharts.com/) library.
 
 ## Resources
  * [yii2](https://github.com/yiisoft/yii2) framework
- * [gionkunz/chartist-js](https://github.com/gionkunz/chartist-js).
+ * [AM charts](https://www.amcharts.com/).
 
 ## Installation
 
@@ -19,7 +19,7 @@ or add
 ```json
 {
 	"require": {
-  		"simialbi/yii2-widget-chart": "~0.1"
+  		"simialbi/yii2-widget-chart": "^0.5"
 	}
 }
 ```
@@ -34,8 +34,7 @@ to the `require` section of your `composer.json`
 /* @var $this yii\web\View */
 /* @var $image stdClass */
 
-use simialbi\yii2\chart\Chart;
-use yii\web\JsExpression;
+use simialbi\yii2\chart\widgets\LineChart;
 
 $this->title = 'my example';
 $this->params['breadcrumbs'][] = $this->title;
@@ -43,28 +42,46 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="my-example">
 <?php
-echo  Chart::widget([
-           'type'              => Chart::TYPE_LINE,
-           'labels'            => [1, 2, 3, 4],
-           'series'            => [[100, 120, 180, 200]],
-           'clientOptions'     => [
-               'showLine' => false,
-               'axisX'    => [
-                   'labelInterpolationFnc' => new JsExpression('function(value, index) {
-                       return index % 13 === 0 ? \'W\' + value : null;
-                   }')
-               ]
-           ],
-           'responsiveOptions' => [
-               'screen and (min-width: 640px)' => [
-                   'axisX' => [
-                       'labelInterpolationFnc' => new JsExpression('function(value, index) {
-                           return index % 4 === 0 ? \'W\' + value : null;
-                       }')
-                   ]
-               ]
-           ]
-      ]);
+echo  LineChart::widget([
+  'data' => [
+      [
+          'country' => 'Lithuania',
+          'litres' => 501.9
+      ],
+      [
+          'country' => 'Czech Republic',
+          'litres' => 301.9
+      ],
+      [
+          'country' => 'Ireland',
+          'litres' => 201.1
+      ],
+      [
+          'country' => 'Germany',
+          'litres' => 165.8
+      ],
+      [
+          'country' => 'Australia',
+          'litres' => 139.9
+      ],
+      [
+          'country' => 'Austria',
+          'litres' => 128.3
+      ],
+      [
+          'country' => 'UK',
+          'litres' => 99
+      ],
+      [
+          'country' => 'Belgium',
+          'litres' => 60
+      ],
+      [
+          'country' => 'The Netherlands',
+          'litres' => 50
+      ]
+  ]
+]);
 ?>
 </div>
 ```
