@@ -47,6 +47,9 @@ class MapChart extends Chart
         $var = Inflector::variablize('chart_' . $id);
 
         $js = "var $var = am4core.create('$id', am4maps.MapChart);\n";
+        if ($this->projection) {
+            $js .= "$var.projection = {$this->projection};";
+        }
         $js .= "$var.geodata = am4geodata_{$this->geodata};\n";
 
         foreach ($this->clientOptions as $key => $value) {
