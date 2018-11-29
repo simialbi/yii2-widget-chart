@@ -1,6 +1,11 @@
 # yii2-widget-chart
 Wrapper for [amcharts4](https://www.amcharts.com/) library.
 
+[![Latest Stable Version](https://poser.pugx.org/simialbi/yii2-widget-chart/v/stable?format=flat-square)](https://packagist.org/packages/simialbi/yii2-widget-chart)
+[![Total Downloads](https://poser.pugx.org/simialbi/yii2-widget-chart/downloads?format=flat-square)](https://packagist.org/packages/simialbi/yii2-widget-chart)
+[![Build Status](https://travis-ci.com/simialbi/yii2-widget-chart.svg?format=flat-square&branch=master)](https://travis-ci.com/simialbi/yii2-widget-chart)
+[![License](https://poser.pugx.org/simialbi/yii2-widget-chart/license?format=flat-square)](https://packagist.org/packages/simialbi/yii2-widget-chart)
+
 ## Resources
  * [yii2](https://github.com/yiisoft/yii2) framework
  * [AM charts](https://www.amcharts.com/).

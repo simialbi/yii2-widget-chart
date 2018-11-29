@@ -7,6 +7,7 @@
 namespace yiiunit\extensions\chart;
 
 use simialbi\yii2\chart\widgets\ChartAsset;
+use simialbi\yii2\chart\widgets\LineChart;
 use Yii;
 
 /**
@@ -25,13 +26,12 @@ class LineChartTest extends TestCase
      */
     public function testSimpleChart()
     {
+        LineChart::$counter = 0;
         $output = $this->app->view->render('@webroot/views/line-chart/simple-chart');
 
         $this->assertArrayHasKey(ChartAsset::class, $this->app->view->assetManager->bundles);
         $this->assertContains('<div id="w0" class="sa-widget-chart"></div>', $output);
         $this->assertContains('am4core.useTheme(am4themes_', $output);
-
-//        echo $output;
     }
 
     /**

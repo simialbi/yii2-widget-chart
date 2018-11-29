@@ -42,7 +42,7 @@ class LineChart extends Chart
         parent::init();
 
         if (ArrayHelper::isAssociative($this->data, false)) {
-            throw new InvalidConfigException(Yii::t('simialbi/chart/line',
+            throw new InvalidConfigException(Yii::t('simialbi/chart/chart',
                 'The "data" property must be an array of objects'));
         }
         if (empty($this->axes)) {

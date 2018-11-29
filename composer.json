@@ -30,7 +30,7 @@
     "ext-json": "*",
     "yiisoft/yii2": "~2.0",
     "simialbi/yii2-simialbi-base": "*",
-    "npm-asset/amcharts--amcharts4": "~4.0@beta"
+    "npm-asset/amcharts--amcharts4": "^4.0.0"
   },
   "require-dev": {
     "php": ">=7.0",
