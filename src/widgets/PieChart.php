@@ -6,6 +6,7 @@
 
 namespace simialbi\yii2\chart\widgets;
 
+use simialbi\yii2\chart\ChartAsset;
 use simialbi\yii2\chart\models\Series;
 use simialbi\yii2\chart\models\series\PieSeries;
 use Yii;

@@ -6,7 +6,7 @@
 
 namespace yiiunit\extensions\chart;
 
-use simialbi\yii2\chart\widgets\ChartAsset;
+use simialbi\yii2\chart\ChartAsset;
 use simialbi\yii2\chart\widgets\LineChart;
 use Yii;
 
@@ -32,6 +32,8 @@ class LineChartTest extends TestCase
         $this->assertArrayHasKey(ChartAsset::class, $this->app->view->assetManager->bundles);
         $this->assertContains('<div id="w0" class="sa-widget-chart"></div>', $output);
         $this->assertContains('am4core.useTheme(am4themes_', $output);
+
+        echo $output;
     }
 
     /**

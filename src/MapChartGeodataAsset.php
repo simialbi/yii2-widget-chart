@@ -4,7 +4,7 @@
  * @author Simon Karlen <simi.albi@gmail.com>
  */
 
-namespace simialbi\yii2\chart\widgets;
+namespace simialbi\yii2\chart;
 
 use simialbi\yii2\web\AssetBundle;
 
@@ -31,6 +31,6 @@ class MapChartGeodataAsset extends AssetBundle
      * {@inheritdoc}
      */
     public $depends = [
-        'simialbi\yii2\chart\widgets\MapChartAsset'
+        'simialbi\yii2\chart\MapChartAsset'
     ];
 }

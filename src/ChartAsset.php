@@ -4,7 +4,7 @@
  * @author Simon Karlen <simi.albi@gmail.com>
  */
 
-namespace simialbi\yii2\chart\widgets;
+namespace simialbi\yii2\chart;
 
 
 use simialbi\yii2\web\AssetBundle;
@@ -19,11 +19,6 @@ use yii\web\View;
  */
 class ChartAsset extends AssetBundle
 {
-    /**
-     * @var string the directory that contains the source asset files for this asset bundle.
-     */
-    public $sourcePath = '@npm/amcharts--amcharts4/dist/script';
-
     /**
      * @var string Themes in amCharts 4 is much more than just collection of appearance settings.
      */

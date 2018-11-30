@@ -4,7 +4,7 @@
  * @author Simon Karlen <simi.albi@gmail.com>
  */
 
-namespace simialbi\yii2\chart\widgets;
+namespace simialbi\yii2\chart;
 
 class MapChartAsset extends ChartAsset
 {

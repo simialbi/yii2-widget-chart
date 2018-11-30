@@ -7,8 +7,8 @@
 namespace yiiunit\extensions\chart;
 
 
+use simialbi\yii2\chart\MapChartGeodataAsset;
 use simialbi\yii2\chart\widgets\MapChart;
-use simialbi\yii2\chart\widgets\MapChartGeodataAsset;
 
 class MapChartTest extends TestCase
 {

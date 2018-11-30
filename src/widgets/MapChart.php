@@ -7,6 +7,7 @@
 namespace simialbi\yii2\chart\widgets;
 
 
+use simialbi\yii2\chart\MapChartGeodataAsset;
 use simialbi\yii2\chart\models\map\Projection;
 use simialbi\yii2\chart\models\Series;
 use yii\helpers\ArrayHelper;

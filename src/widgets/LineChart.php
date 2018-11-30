@@ -6,6 +6,7 @@
 
 namespace simialbi\yii2\chart\widgets;
 
+use simialbi\yii2\chart\ChartAsset;
 use simialbi\yii2\chart\models\Axis;
 use simialbi\yii2\chart\models\axis\CategoryAxis;
 use simialbi\yii2\chart\models\axis\ValueAxis;

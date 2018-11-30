@@ -7,7 +7,7 @@
 namespace yiiunit\extensions\chart;
 
 
-use simialbi\yii2\chart\widgets\ChartAsset;
+use simialbi\yii2\chart\ChartAsset;
 use simialbi\yii2\chart\widgets\PieChart;
 
 class PieChartTest extends TestCase
