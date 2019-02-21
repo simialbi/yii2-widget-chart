@@ -26,3 +26,6 @@ composer.lock
 phpunit.phar
 # local phpunit config
 /phpunit.xml
+# phpunit cache files
+.phpunit.result.cache
+tests/.phpunit.result.cache

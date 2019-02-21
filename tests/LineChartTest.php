@@ -15,7 +15,7 @@ use Yii;
  */
 class LineChartTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->mockWebApplication();
@@ -30,10 +30,8 @@ class LineChartTest extends TestCase
         $output = $this->app->view->render('@webroot/views/line-chart/simple-chart');
 
         $this->assertArrayHasKey(ChartAsset::class, $this->app->view->assetManager->bundles);
-        $this->assertContains('<div id="w0" class="sa-widget-chart"></div>', $output);
-        $this->assertContains('am4core.useTheme(am4themes_', $output);
-
-        echo $output;
+        $this->assertStringContainsString('<div id="w0" class="sa-widget-chart"></div>', $output);
+        $this->assertStringContainsString('am4core.useTheme(am4themes_', $output);
     }
 
     /**
