@@ -26,14 +26,14 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": ">=5.6",
     "ext-json": "*",
     "yiisoft/yii2": "^2.0.13",
     "simialbi/yii2-simialbi-base": "^0.4"
   },
   "require-dev": {
     "yiisoft/yii2-coding-standards": "~2.0",
-    "phpunit/phpunit": "^8.0.0"
+    "phpunit/phpunit": "^5.0.0"
   },
   "suggest": {
   },
