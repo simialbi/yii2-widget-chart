@@ -1,7 +1,7 @@
 <?php
 /**
  * @package yii2-widget-chart
- * @author Simon Karlen <simi.albi@gmail.com>
+ * @author Simon Karlen <simi.albi@outlook.com>
  */
 
 namespace simialbi\yii2\chart\widgets;
@@ -55,6 +55,44 @@ class LineChart extends Chart
     }
 
     /**
+     * Auto generate axes
+     */
+    protected function generateAxes()
+    {
+        $this->axes = [];
+
+        foreach ($this->data[0] as $key => $value) {
+            if (is_numeric($value)) {
+                $this->axes[] = new ValueAxis();
+            } else {
+                $this->axes[] = new CategoryAxis([
+                    'dataFields' => [
+                        'category' => $key
+                    ]
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Auto generate axes
+     */
+    protected function generateSeries()
+    {
+        $this->series = new ColumnSeries([
+            'dataFields' => []
+        ]);
+
+        foreach ($this->data[0] as $key => $value) {
+            if (is_numeric($value)) {
+                $this->series->dataFields['valueY'] = $key;
+            } else {
+                $this->series->dataFields['categoryX'] = $key;
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function registerPlugin($pluginName = null)
@@ -92,43 +130,5 @@ class LineChart extends Chart
         }
 
         $this->view->registerJs($js);
-    }
-
-    /**
-     * Auto generate axes
-     */
-    protected function generateAxes()
-    {
-        $this->axes = [];
-
-        foreach ($this->data[0] as $key => $value) {
-            if (is_numeric($value)) {
-                $this->axes[] = new ValueAxis();
-            } else {
-                $this->axes[] = new CategoryAxis([
-                    'dataFields' => [
-                        'category' => $key
-                    ]
-                ]);
-            }
-        }
-    }
-
-    /**
-     * Auto generate axes
-     */
-    protected function generateSeries()
-    {
-        $this->series = new ColumnSeries([
-            'dataFields' => []
-        ]);
-
-        foreach ($this->data[0] as $key => $value) {
-            if (is_numeric($value)) {
-                $this->series->dataFields['valueY'] = $key;
-            } else {
-                $this->series->dataFields['categoryX'] = $key;
-            }
-        }
     }
 }

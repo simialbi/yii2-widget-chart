@@ -1,7 +1,7 @@
 <?php
 /**
  * @package yii2-widget-chart
- * @author Simon Karlen <simi.albi@gmail.com>
+ * @author Simon Karlen <simi.albi@outlook.com>
  */
 
 namespace simialbi\yii2\chart\models;
@@ -762,6 +762,13 @@ class Sprite extends BaseObject
      * The values may range from 0 (fully transparent) to 1 (fully opaque).
      */
     public $strokeOpacity;
+
+    /**
+     * @var float Stroke (outline) opacity.
+     *
+     * The values may range from 0 (fully transparent) to 1 (fully opaque).
+     */
+    public $strokeWidth;
 
     /**
      * @var array Returns element's swipe gesture options.

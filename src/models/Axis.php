@@ -1,7 +1,7 @@
 <?php
 /**
  * @package yii2-widget-chart
- * @author Simon Karlen <simi.albi@gmail.com>
+ * @author Simon Karlen <simi.albi@outlook.com>
  */
 
 namespace simialbi\yii2\chart\models;
@@ -42,6 +42,15 @@ class Axis extends Component
      * You can set custom text on it so that it would be bigger/smaller
      */
     public $ghostLabel;
+
+    /**
+     * @var float Axis start location. Works on Date/Category axis, doesn't work on Value axis.
+     * One of:
+     *  - [[self::LOCATION_START]] : Full first cell is shown.
+     *  - [[self::LOCATION_MIDDLE]] : Half of first cell is shown.
+     *  - [[self::LOCATION_END]] :  None of the first cell is visible. (you probably don't want that)
+     */
+    public $startLocation;
 
     /**
      * @var Label A [[Label]] instance that is used for Axis title label.

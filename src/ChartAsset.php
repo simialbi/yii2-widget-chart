@@ -1,7 +1,7 @@
 <?php
 /**
  * @package yii2-charts
- * @author Simon Karlen <simi.albi@gmail.com>
+ * @author Simon Karlen <simi.albi@outlook.com>
  */
 
 namespace simialbi\yii2\chart;
@@ -15,7 +15,7 @@ use yii\web\View;
 /**
  * Asset bundle for chart widget
  *
- * @author Simon Karlen <simi.albi@gmail.com>
+ * @author Simon Karlen <simi.albi@outlook.com>
  */
 class ChartAsset extends AssetBundle
 {
@@ -40,6 +40,7 @@ class ChartAsset extends AssetBundle
         'only' => [
             'deps/*',
             'lang/*',
+            'plugins/*',
             'themes/*',
             'core.js',
             'core.js.map',

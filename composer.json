@@ -15,7 +15,7 @@
   "authors": [
     {
       "name": "Simon Karlen",
-      "email": "simi.albi@gmail.com"
+      "email": "simi.albi@outlook.com"
     }
   ],
   "prefer-stable": true,
@@ -29,11 +29,12 @@
     "php": ">=5.6",
     "ext-json": "*",
     "yiisoft/yii2": "^2.0.13",
-    "simialbi/yii2-simialbi-base": "*"
+    "simialbi/yii2-simialbi-base": "^0.4"
   },
   "require-dev": {
+    "php": "^7.2",
     "yiisoft/yii2-coding-standards": "~2.0",
-    "phpunit/phpunit": "*"
+    "phpunit/phpunit": "^8.0.0"
   },
   "suggest": {
   },

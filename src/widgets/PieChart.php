@@ -1,7 +1,7 @@
 <?php
 /**
  * @package yii2-widget-chart
- * @author Simon Karlen <simi.albi@gmail.com>
+ * @author Simon Karlen <simi.albi@outlook.com>
  */
 
 namespace simialbi\yii2\chart\widgets;
@@ -40,6 +40,22 @@ class PieChart extends Chart
     }
 
     /**
+     * Auto generate axes
+     */
+    protected function generateSeries()
+    {
+        $this->series = new PieSeries();
+
+        foreach ($this->data[0] as $key => $value) {
+            if (is_numeric($value)) {
+                $this->series->dataFields['value'] = $key;
+            } else {
+                $this->series->dataFields['category'] = $key;
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function registerPlugin($pluginName = null)
@@ -69,21 +85,5 @@ class PieChart extends Chart
         }
 
         $this->view->registerJs($js);
-    }
-
-    /**
-     * Auto generate axes
-     */
-    protected function generateSeries()
-    {
-        $this->series = new PieSeries();
-
-        foreach ($this->data[0] as $key => $value) {
-            if (is_numeric($value)) {
-                $this->series->dataFields['value'] = $key;
-            } else {
-                $this->series->dataFields['category'] = $key;
-            }
-        }
     }
 }
