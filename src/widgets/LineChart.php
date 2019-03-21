@@ -9,6 +9,7 @@ namespace simialbi\yii2\chart\widgets;
 use simialbi\yii2\chart\ChartAsset;
 use simialbi\yii2\chart\models\Axis;
 use simialbi\yii2\chart\models\axis\CategoryAxis;
+use simialbi\yii2\chart\models\axis\DateAxis;
 use simialbi\yii2\chart\models\axis\ValueAxis;
 use simialbi\yii2\chart\models\BaseObject;
 use simialbi\yii2\chart\models\Series;
@@ -127,7 +128,7 @@ class LineChart extends Chart
         foreach ($this->axes as $axis) {
             $axis->variableParent = $var;
             $js .= "var {$axis->varName} = " . (string)$axis . ';';
-            if ($axis instanceof CategoryAxis) {
+            if ($axis instanceof CategoryAxis || $axis instanceof DateAxis) {
                 $js .= "$var.xAxes.push({$axis->varName});\n";
             } else {
                 $js .= "$var.yAxes.push({$axis->varName});\n";
