@@ -15,4 +15,5 @@ use simialbi\yii2\chart\models\BaseObject;
  */
 class ColorModifier extends BaseObject
 {
+    const NAME_SPACE = 'am4core';
 }
