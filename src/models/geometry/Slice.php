@@ -9,6 +9,10 @@ namespace simialbi\yii2\chart\models\geometry;
 
 use simialbi\yii2\chart\models\Sprite;
 
+/**
+ * Draws a wedged semi-circle - slice. Usually used for Pie/Donut charts.
+ * @package simialbi\yii2\chart\models\geometry
+ */
 class Slice extends Sprite
 {
     /**
@@ -50,9 +54,15 @@ class Slice extends Sprite
     public $radiusY;
 
     /**
+     * @var float
+     * @todo description
+     */
+    public $shiftRadius;
+
+    /**
      * @var Sprite Main slice element.
      *
-     * Slice itself is a Container so that Slice3D could extend it and add 3D elements to it.
+     * Slice itself is a [[Container]] so that [[Slice3D]] could extend it and add 3D elements to it.
      */
     public $slice;
 

@@ -67,6 +67,12 @@ class ChartAsset extends AssetBundle
         $langFile = Yii::getAlias($this->sourcePath . '/lang/' . $language . '.js');
         if (file_exists($langFile)) {
             $this->js[] = 'lang/' . $language . '.js';
+        } else {
+            list($shortLanguage,) = explode('_', $language);
+            $langFile = Yii::getAlias($this->sourcePath . '/lang/' . $shortLanguage . '.js');
+            if ($shortLanguage !== $language && file_exists($langFile)) {
+                $this->js[] = 'lang/' . $shortLanguage . '.js';
+            }
         }
 
         Yii::$app->view->registerJs("am4core.useTheme(am4themes_{$this->theme});\n", View::POS_READY, 'sa-chart-theme');

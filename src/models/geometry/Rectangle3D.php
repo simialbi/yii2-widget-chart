@@ -9,6 +9,10 @@ namespace simialbi\yii2\chart\models\geometry;
 
 use simialbi\yii2\chart\models\Sprite;
 
+/**
+ * Builds a 3D rectangle
+ * @package simialbi\yii2\chart\models\geometry
+ */
 class Rectangle3D extends Sprite
 {
     /**

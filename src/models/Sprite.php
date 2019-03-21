@@ -35,6 +35,9 @@ class Sprite extends BaseObject
     const ORIENTATION_HORIZONTAL = 'horizontal';
     const ORIENTATION_VERTICAL = 'vertical';
 
+    const POSITION_LEFT = 'left';
+    const POSITION_RIGHT = 'right';
+
     const ROLE_ALERT = 'alert';
     const ROLE_ALERTDIALOG = 'alertdialog';
     const ROLE_APPLICATION = 'application';

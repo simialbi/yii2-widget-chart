@@ -35,8 +35,6 @@
     "yiisoft/yii2-coding-standards": "~2.0",
     "phpunit/phpunit": "^5.0.0"
   },
-  "suggest": {
-  },
   "config": {
     "process-timeout": 1800
   },
@@ -48,6 +46,11 @@
   "autoload-dev": {
     "psr-4": {
       "yiiunit\\extensions\\chart\\": "tests"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
     }
   }
 }

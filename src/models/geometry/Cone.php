@@ -8,7 +8,12 @@ namespace simialbi\yii2\chart\models\geometry;
 
 
 use simialbi\yii2\chart\models\Sprite;
+use simialbi\yii2\chart\models\svg\fills\LinearGradientModifier;
 
+/**
+ * Builds a round cone/cylinder.
+ * @package simialbi\yii2\chart\models\geometry
+ */
 class Cone extends Sprite
 {
     /**
@@ -18,7 +23,7 @@ class Cone extends Sprite
     public $angle;
 
     /**
-     * @var array Gradient for the fill of the body.
+     * @var LinearGradientModifier Gradient for the fill of the body.
      */
     public $bodyFillModifier;
 

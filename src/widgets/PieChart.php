@@ -31,8 +31,10 @@ class PieChart extends Chart
         parent::init();
 
         if (ArrayHelper::isAssociative($this->data, false)) {
-            throw new InvalidConfigException(Yii::t('simialbi/chart/chart',
-                'The "data" property must be an array of objects'));
+            throw new InvalidConfigException(Yii::t(
+                'simialbi/chart/chart',
+                'The "data" property must be an array of objects'
+            ));
         }
         if (empty($this->series)) {
             $this->generateSeries();
@@ -70,7 +72,7 @@ class PieChart extends Chart
 
         foreach ($this->clientOptions as $key => $value) {
             if (is_string($key)) {
-                $js .= "$var.$key = " . Json::htmlEncode($value) . ";";
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
             }
         }
 
@@ -80,7 +82,7 @@ class PieChart extends Chart
         }
 
         foreach ($this->series as $series) {
-            $js .= "var {$series->varName} = " . (string)$series . ";";
+            $js .= "var {$series->varName} = " . (string)$series . ';';
             $js .= "$var.series.push({$series->varName});";
         }
 

@@ -10,6 +10,10 @@ namespace simialbi\yii2\chart\models\column;
 use simialbi\yii2\chart\models\Column;
 use simialbi\yii2\chart\models\geometry\Slice;
 
+/**
+ * Class used to creates RadarColumns.
+ * @package simialbi\yii2\chart\models\column
+ */
 class RadarColumn extends Column
 {
     /**

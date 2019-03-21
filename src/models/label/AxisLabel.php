@@ -9,6 +9,10 @@ namespace simialbi\yii2\chart\models\label;
 
 use simialbi\yii2\chart\models\Label;
 
+/**
+ * Used to create labels on [[Axis]].
+ * @package simialbi\yii2\chart\models\label
+ */
 class AxisLabel extends Label
 {
     const NAME_SPACE = 'am4charts';

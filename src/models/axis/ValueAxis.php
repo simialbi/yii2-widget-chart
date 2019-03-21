@@ -8,7 +8,12 @@ namespace simialbi\yii2\chart\models\axis;
 
 
 use simialbi\yii2\chart\models\Axis;
+use simialbi\yii2\chart\models\series\XYSeries;
 
+/**
+ * Used to create a value axis for the chart.
+ * @package simialbi\yii2\chart\models\axis
+ */
 class ValueAxis extends Axis
 {
     /**
@@ -48,6 +53,21 @@ class ValueAxis extends Axis
      * displaying from 50 to 200 because we asked to expand minimum value by 50% (0.5).
      */
     public $extraMin;
+
+    /**
+     * @var boolean Indicates if a current selection (zoom) should be kept across data updates.
+     *
+     * If your axis is zoomed while chart's data is updated, the axis will try to retain the same start and end values.
+     *
+     * You can also use this to initially pre-zoom axis:
+     * ```php
+     * $axis->keepSelection = true;
+     * $axis->start = 0.5;
+     * $axis->end = 0.7;
+     * ```
+     * The above will start the chart zoomed from the middle of the actual scope to 70%. Defaults to `false`
+     */
+    public $keepSelection;
 
     /**
      * @var boolean Indicates if this axis should use a logarithmic scale.
@@ -98,10 +118,20 @@ class ValueAxis extends Axis
     public $minZoomed;
 
     /**
-     * @var boolean Indicates whether to blindly use exact `min` and `max` values set by user when generating Axis
+     * @var XYSeries[] A list of Series that are using this Axis.
+     */
+    public $series;
+
+    /**
+     * @var boolean Indicates whether to blindly use exact `$min` and `$max` values set by user when generating Axis
      * scale.
      *
      * If not set, the Axis might slightly adjust those values to accomodate a better looking grid.
+     *
+     * > NOTE: if `$min` and `$max` are not set, setting `$strictMinMax` to `true` will result in fixing the scale of
+     * > the axis to actual lowest and highest values in the series within currently selected scope.
+     *
+     * Defaults to `false`
      */
-    public $stricMinMax;
+    public $strictMinMax;
 }

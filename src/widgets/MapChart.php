@@ -55,7 +55,7 @@ class MapChart extends Chart
 
         foreach ($this->clientOptions as $key => $value) {
             if (is_string($key)) {
-                $js .= "$var.$key = " . Json::htmlEncode($value) . ";";
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
             }
         }
 
@@ -65,7 +65,7 @@ class MapChart extends Chart
             }
 
             foreach ($this->series as $series) {
-                $js .= "var {$series->varName} = " . (string)$series . ";";
+                $js .= "var {$series->varName} = " . (string)$series . ';';
                 $js .= "$var.series.push({$series->varName});";
             }
         }

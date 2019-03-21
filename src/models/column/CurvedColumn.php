@@ -10,6 +10,10 @@ namespace simialbi\yii2\chart\models\column;
 use simialbi\yii2\chart\models\Column;
 use simialbi\yii2\chart\models\Sprite;
 
+/**
+ * Class used to creates CurvedColumns.
+ * @package simialbi\yii2\chart\models\column
+ */
 class CurvedColumn extends Column
 {
     /**

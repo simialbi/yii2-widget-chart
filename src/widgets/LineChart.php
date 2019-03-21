@@ -43,8 +43,10 @@ class LineChart extends Chart
         parent::init();
 
         if (ArrayHelper::isAssociative($this->data, false)) {
-            throw new InvalidConfigException(Yii::t('simialbi/chart/chart',
-                'The "data" property must be an array of objects'));
+            throw new InvalidConfigException(Yii::t(
+                'simialbi/chart/chart',
+                'The "data" property must be an array of objects'
+            ));
         }
         if (empty($this->axes)) {
             $this->generateAxes();
@@ -107,12 +109,12 @@ class LineChart extends Chart
 
         foreach ($this->clientOptions as $key => $value) {
             if (is_string($key)) {
-                $js .= "$var.$key = " . Json::htmlEncode($value) . ";";
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
             }
         }
 
         foreach ($this->axes as $axis) {
-            $js .= "var {$axis->varName} = " . (string)$axis . ";";
+            $js .= "var {$axis->varName} = " . (string)$axis . ';';
             if ($axis instanceof CategoryAxis) {
                 $js .= "$var.xAxes.push({$axis->varName});\n";
             } else {
@@ -125,7 +127,7 @@ class LineChart extends Chart
         }
 
         foreach ($this->series as $series) {
-            $js .= "var {$series->varName} = " . (string)$series . ";";
+            $js .= "var {$series->varName} = " . (string)$series . ';';
             $js .= "$var.series.push({$series->varName});";
         }
 

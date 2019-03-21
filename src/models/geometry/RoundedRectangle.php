@@ -9,6 +9,10 @@ namespace simialbi\yii2\chart\models\geometry;
 
 use simialbi\yii2\chart\models\Sprite;
 
+/**
+ * Draws a rectangle with rounded corners.
+ * @package simialbi\yii2\chart\models\geometry
+ */
 class RoundedRectangle extends Sprite
 {
     /**
