@@ -317,6 +317,28 @@ class Sprite extends BaseObject
     public $focusable;
 
     /**
+     * @var string Font family to be used for the text.
+     *
+     * Parts of the text may override this setting using in-line formatting.
+     */
+    public $fontFamily;
+
+    /**
+     * @var string|integer Font size to be used for the text. The size can either be numeric, in pixels,
+     * or other measurements.
+     *
+     * Parts of the text may override this setting using in-line formatting.
+     */
+    public $fontSize;
+
+    /**
+     * @var string Font weight to use for text.
+     *
+     * Parts of the text may override this setting using in-line formatting.
+     */
+    public $fontWeight;
+
+    /**
      * @var integer Returns element's current "global" scale.
      *
      * Scale values accumulate over hierarchy of elements.
