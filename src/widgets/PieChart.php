@@ -7,6 +7,7 @@
 namespace simialbi\yii2\chart\widgets;
 
 use simialbi\yii2\chart\ChartAsset;
+use simialbi\yii2\chart\models\BaseObject;
 use simialbi\yii2\chart\models\Series;
 use simialbi\yii2\chart\models\series\PieSeries;
 use Yii;
@@ -71,6 +72,9 @@ class PieChart extends Chart
         $js .= "$var.data = $data;\n";
 
         foreach ($this->clientOptions as $key => $value) {
+            if ($value instanceof BaseObject) {
+                $value->variableParent = $var;
+            }
             if (is_string($key)) {
                 $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
             }
@@ -82,6 +86,7 @@ class PieChart extends Chart
         }
 
         foreach ($this->series as $series) {
+            $series->variableParent = $var;
             $js .= "var {$series->varName} = " . (string)$series . ';';
             $js .= "$var.series.push({$series->varName});";
         }

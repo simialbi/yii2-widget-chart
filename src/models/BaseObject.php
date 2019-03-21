@@ -20,7 +20,7 @@ use yii\web\JsExpression;
  * @property-read mixed $expression the JavaScript expression represented by this object
  *
  * @property string|JsExpression $appendix append custom java script
- * @property string $parent If object has parent this var contains parent variable name
+ * @property string $variableParent If object has parent this var contains parent variable name
  */
 class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
 {
@@ -51,7 +51,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
     /**
      * @var string $variable Name of parent
      */
-    private $_parent;
+    private $_variableParent;
 
     /**
      * The PHP magic function converting an object into a string.
@@ -83,9 +83,10 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
             $value = $property->getValue($this);
 
             if (isset($value)) {
-                if ($value instanceof static) {
-                    $value->parent = $this->varName;
+                if ($value instanceof BaseObject) {
+                    $value->variableParent = $this->varName;
                 }
+                $js .= '// Is instance of ' . ($value instanceof BaseObject ? 'true' : 'false') . "\n";
                 $js .= "{$this->varName}.$key = " . Json::htmlEncode($value) . ";\n";
             }
         }
@@ -94,7 +95,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
             $js .= (string)$this->appendix . "\n";
         }
 
-        return "(function (parent) { $js return {$this->varName}; })(" . Json::htmlEncode($this->parent) . ') ';
+        return "(function (parent) { $js return {$this->varName}; })(" . ($this->variableParent ?: 'null') . ') ';
     }
 
     /**
@@ -129,18 +130,18 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * Parent property getter
      * @return string
      */
-    public function getParent()
+    public function getVariableParent()
     {
-        return $this->_parent;
+        return $this->_variableParent;
     }
 
     /**
      * Parent property setter
      * @param string $parent
      */
-    public function setParent($parent)
+    public function setVariableParent($parent)
     {
-        $this->_parent = $parent;
+        $this->_variableParent = $parent;
     }
 
     /**

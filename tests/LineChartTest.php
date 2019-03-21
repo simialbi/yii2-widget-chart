@@ -35,6 +35,17 @@ class LineChartTest extends TestCase
     }
 
     /**
+     * @depends testSimpleChart
+     */
+    public function testInheritance()
+    {
+        LineChart::$counter = 0;
+        $output = $this->app->view->render('@webroot/views/line-chart/inheritance');
+
+        $this->assertContains('return scrollbarSaCo0; })(chartW0)', $output);
+    }
+
+    /**
      *
      */
     public function testMockApplication()

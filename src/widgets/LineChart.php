@@ -10,6 +10,7 @@ use simialbi\yii2\chart\ChartAsset;
 use simialbi\yii2\chart\models\Axis;
 use simialbi\yii2\chart\models\axis\CategoryAxis;
 use simialbi\yii2\chart\models\axis\ValueAxis;
+use simialbi\yii2\chart\models\BaseObject;
 use simialbi\yii2\chart\models\Series;
 use simialbi\yii2\chart\models\series\ColumnSeries;
 use Yii;
@@ -108,12 +109,16 @@ class LineChart extends Chart
         $js .= "$var.data = $data;\n";
 
         foreach ($this->clientOptions as $key => $value) {
+            if ($value instanceof BaseObject) {
+                $value->variableParent = $var;
+            }
             if (is_string($key)) {
                 $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
             }
         }
 
         foreach ($this->axes as $axis) {
+            $axis->variableParent = $var;
             $js .= "var {$axis->varName} = " . (string)$axis . ';';
             if ($axis instanceof CategoryAxis) {
                 $js .= "$var.xAxes.push({$axis->varName});\n";
@@ -127,6 +132,7 @@ class LineChart extends Chart
         }
 
         foreach ($this->series as $series) {
+            $series->variableParent = $var;
             $js .= "var {$series->varName} = " . (string)$series . ';';
             $js .= "$var.series.push({$series->varName});";
         }

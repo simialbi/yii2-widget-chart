@@ -8,6 +8,7 @@ namespace simialbi\yii2\chart\widgets;
 
 
 use simialbi\yii2\chart\MapChartGeodataAsset;
+use simialbi\yii2\chart\models\BaseObject;
 use simialbi\yii2\chart\models\map\Projection;
 use simialbi\yii2\chart\models\Series;
 use yii\helpers\ArrayHelper;
@@ -54,6 +55,9 @@ class MapChart extends Chart
         $js .= "$var.geodata = am4geodata_{$this->geodata};\n";
 
         foreach ($this->clientOptions as $key => $value) {
+            if ($value instanceof BaseObject) {
+                $value->variableParent = $var;
+            }
             if (is_string($key)) {
                 $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
             }
@@ -65,6 +69,7 @@ class MapChart extends Chart
             }
 
             foreach ($this->series as $series) {
+                $series->variableParent = $var;
                 $js .= "var {$series->varName} = " . (string)$series . ';';
                 $js .= "$var.series.push({$series->varName});";
             }
