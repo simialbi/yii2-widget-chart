@@ -43,17 +43,19 @@ class LineChart extends Chart
     {
         parent::init();
 
-        if (ArrayHelper::isAssociative($this->data, false)) {
-            throw new InvalidConfigException(Yii::t(
-                'simialbi/chart/chart',
-                'The "data" property must be an array of objects'
-            ));
-        }
-        if (empty($this->axes)) {
-            $this->generateAxes();
-        }
-        if (empty($this->series)) {
-            $this->generateSeries();
+        if (isset($this->data)) {
+            if (ArrayHelper::isAssociative($this->data, false)) {
+                throw new InvalidConfigException(Yii::t(
+                    'simialbi/chart/chart',
+                    'The "data" property must be an array of objects'
+                ));
+            }
+            if (empty($this->axes)) {
+                $this->generateAxes();
+            }
+            if (empty($this->series)) {
+                $this->generateSeries();
+            }
         }
     }
 
@@ -103,10 +105,15 @@ class LineChart extends Chart
         ChartAsset::register($this->view);
         $id = $this->options['id'];
         $var = Inflector::variablize('chart_' . $id);
-        $data = Json::htmlEncode($this->data);
 
         $js = "var $var = am4core.create('$id', am4charts.XYChart);\n";
-        $js .= "$var.data = $data;\n";
+        if (isset($this->data)) {
+            $js .= "$var.data = " . Json::htmlEncode($this->data) . ";\n";
+        } else {
+            foreach ($this->dataSource as $key => $value) {
+                $js .= "$var.dataSource.$key = " . Json::htmlEncode($value) . "\n;";
+            }
+        }
 
         foreach ($this->clientOptions as $key => $value) {
             if ($value instanceof BaseObject) {

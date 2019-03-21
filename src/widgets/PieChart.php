@@ -31,14 +31,16 @@ class PieChart extends Chart
     {
         parent::init();
 
-        if (ArrayHelper::isAssociative($this->data, false)) {
-            throw new InvalidConfigException(Yii::t(
-                'simialbi/chart/chart',
-                'The "data" property must be an array of objects'
-            ));
-        }
-        if (empty($this->series)) {
-            $this->generateSeries();
+        if (isset($this->data)) {
+            if (ArrayHelper::isAssociative($this->data, false)) {
+                throw new InvalidConfigException(Yii::t(
+                    'simialbi/chart/chart',
+                    'The "data" property must be an array of objects'
+                ));
+            }
+            if (empty($this->series)) {
+                $this->generateSeries();
+            }
         }
     }
 

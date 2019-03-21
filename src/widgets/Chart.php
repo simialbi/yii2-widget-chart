@@ -7,6 +7,8 @@
 namespace simialbi\yii2\chart\widgets;
 
 use simialbi\yii2\widgets\Widget;
+use Yii;
+use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 
 /**
@@ -22,12 +24,25 @@ class Chart extends Widget
     public $data;
 
     /**
+     * @var array
+     */
+    public $dataSource;
+
+    /**
      * {@inheritdoc}
      * @throws \ReflectionException
+     * @throws InvalidConfigException
      */
     public function init()
     {
         parent::init();
+
+        if (!isset($this->data) && !isset($this->dataSource) && static::class !== MapChart::class) {
+            throw new InvalidConfigException(Yii::t(
+                'simialbi/chart/chart',
+                'Either the "data" or the "dataSource" property must be set'
+            ));
+        }
 
         $this->registerTranslations();
     }
