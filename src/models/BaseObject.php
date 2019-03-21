@@ -20,6 +20,7 @@ use yii\web\JsExpression;
  * @property-read mixed $expression the JavaScript expression represented by this object
  *
  * @property string|JsExpression $appendix append custom java script
+ * @property string $parent If object has parent this var contains parent variable name
  */
 class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
 {
@@ -46,6 +47,11 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * @var string|JsExpression Custom javascript to append
      */
     private $_appendix;
+
+    /**
+     * @var string $variable Name of parent
+     */
+    private $_parent;
 
     /**
      * The PHP magic function converting an object into a string.
@@ -77,6 +83,9 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
             $value = $property->getValue($this);
 
             if (isset($value)) {
+                if ($value instanceof static) {
+                    $value->parent = $this->varName;
+                }
                 $js .= "{$this->varName}.$key = " . Json::htmlEncode($value) . ";\n";
             }
         }
@@ -85,7 +94,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
             $js .= (string)$this->appendix . "\n";
         }
 
-        return "(function () { $js return {$this->varName}; })() ";
+        return "(function (parent) { $js return {$this->varName}; })(" . Json::htmlEncode($this->parent) . ') ';
     }
 
     /**
@@ -114,6 +123,24 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
     public function setAppendix($appendix)
     {
         $this->_appendix = $appendix;
+    }
+
+    /**
+     * Parent property getter
+     * @return string
+     */
+    public function getParent()
+    {
+        return $this->_parent;
+    }
+
+    /**
+     * Parent property setter
+     * @param string $parent
+     */
+    public function setParent($parent)
+    {
+        $this->_parent = $parent;
     }
 
     /**
