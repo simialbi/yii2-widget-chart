@@ -7,6 +7,7 @@
 namespace yiiunit\extensions\chart;
 
 use simialbi\yii2\chart\ChartAsset;
+use simialbi\yii2\chart\models\BaseObject;
 use simialbi\yii2\chart\widgets\LineChart;
 use Yii;
 
@@ -40,9 +41,10 @@ class LineChartTest extends TestCase
     public function testInheritance()
     {
         LineChart::$counter = 0;
+        BaseObject::$counter = 0;
         $output = $this->app->view->render('@webroot/views/line-chart/inheritance');
 
-        $this->assertContains('return scrollbarSaCo0; })(chartW0)', $output);
+        $this->assertContains('scrollbarSaCo0.parent = chartW0.bottomAxesContainer', $output);
     }
 
     /**

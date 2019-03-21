@@ -62,7 +62,8 @@ $this->beginPage(); ?>
             ],
             'clientOptions' => [
                 'scrollbarX' => Yii::createObject([
-                    'class' => 'simialbi\yii2\chart\models\Scrollbar'
+                    'class' => 'simialbi\yii2\chart\models\Scrollbar',
+                    'parent' => new \yii\web\JsExpression('{parent}.bottomAxesContainer')
                 ])
             ]
         ]);

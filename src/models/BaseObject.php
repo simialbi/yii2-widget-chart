@@ -86,8 +86,8 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
                 if ($value instanceof BaseObject) {
                     $value->variableParent = $this->varName;
                 }
-                $js .= '// Is instance of ' . ($value instanceof BaseObject ? 'true' : 'false') . "\n";
-                $js .= "{$this->varName}.$key = " . Json::htmlEncode($value) . ";\n";
+                $val = str_replace('{parent}', $this->variableParent, Json::htmlEncode($value));
+                $js .= "{$this->varName}.$key = $val;\n";
             }
         }
 
@@ -95,7 +95,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
             $js .= (string)$this->appendix . "\n";
         }
 
-        return "(function (parent) { $js return {$this->varName}; })(" . ($this->variableParent ?: 'null') . ') ';
+        return "(function () { $js return {$this->varName}; })() ";
     }
 
     /**
