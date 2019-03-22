@@ -116,15 +116,6 @@ class LineChart extends Chart
             }
         }
 
-        foreach ($this->clientOptions as $key => $value) {
-            if ($value instanceof BaseObject) {
-                $value->variableParent = $var;
-            }
-            if (is_string($key)) {
-                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
-            }
-        }
-
         foreach ($this->axes as $axis) {
             $axis->variableParent = $var;
             $js .= "var {$axis->varName} = " . (string)$axis . ';';
@@ -143,6 +134,15 @@ class LineChart extends Chart
             $series->variableParent = $var;
             $js .= "var {$series->varName} = " . (string)$series . ';';
             $js .= "$var.series.push({$series->varName});";
+        }
+
+        foreach ($this->clientOptions as $key => $value) {
+            if ($value instanceof BaseObject) {
+                $value->variableParent = $var;
+            }
+            if (is_string($key)) {
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
+            }
         }
 
         $this->view->registerJs($js);

@@ -54,15 +54,6 @@ class MapChart extends Chart
         }
         $js .= "$var.geodata = am4geodata_{$this->geodata};\n";
 
-        foreach ($this->clientOptions as $key => $value) {
-            if ($value instanceof BaseObject) {
-                $value->variableParent = $var;
-            }
-            if (is_string($key)) {
-                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
-            }
-        }
-
         if ($this->series) {
             if (is_object($this->series) || ArrayHelper::isAssociative($this->series)) {
                 $this->series = [$this->series];
@@ -72,6 +63,15 @@ class MapChart extends Chart
                 $series->variableParent = $var;
                 $js .= "var {$series->varName} = " . (string)$series . ';';
                 $js .= "$var.series.push({$series->varName});";
+            }
+        }
+
+        foreach ($this->clientOptions as $key => $value) {
+            if ($value instanceof BaseObject) {
+                $value->variableParent = $var;
+            }
+            if (is_string($key)) {
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
             }
         }
 

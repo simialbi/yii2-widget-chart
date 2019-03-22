@@ -73,16 +73,6 @@ class PieChart extends Chart
         $js = "var $var = am4core.create('$id', am4charts.PieChart);\n";
         $js .= "$var.data = $data;\n";
 
-        foreach ($this->clientOptions as $key => $value) {
-            if ($value instanceof BaseObject) {
-                $value->variableParent = $var;
-            }
-            if (is_string($key)) {
-                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
-            }
-        }
-
-
         if (is_object($this->series) || ArrayHelper::isAssociative($this->series)) {
             $this->series = [$this->series];
         }
@@ -91,6 +81,15 @@ class PieChart extends Chart
             $series->variableParent = $var;
             $js .= "var {$series->varName} = " . (string)$series . ';';
             $js .= "$var.series.push({$series->varName});";
+        }
+
+        foreach ($this->clientOptions as $key => $value) {
+            if ($value instanceof BaseObject) {
+                $value->variableParent = $var;
+            }
+            if (is_string($key)) {
+                $js .= "$var.$key = " . Json::htmlEncode($value) . ';';
+            }
         }
 
         $this->view->registerJs($js);
