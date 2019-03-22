@@ -14,6 +14,7 @@ use simialbi\yii2\chart\models\axis\ValueAxis;
 use simialbi\yii2\chart\models\BaseObject;
 use simialbi\yii2\chart\models\Series;
 use simialbi\yii2\chart\models\series\ColumnSeries;
+use simialbi\yii2\chart\models\series\ColumnSeries3D;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
@@ -35,6 +36,11 @@ class LineChart extends Chart
      * @var Series|Series[]|null A series is represented by a series class. If not defined, it will be auto created by data.
      */
     public $series;
+
+    /**
+     * @var boolean True to generate a 3d chart
+     */
+    public $is3D = false;
 
     /**
      * {@inheritdoc}
@@ -85,9 +91,15 @@ class LineChart extends Chart
      */
     protected function generateSeries()
     {
-        $this->series = new ColumnSeries([
-            'dataFields' => []
-        ]);
+        if ($this->is3D) {
+            $this->series = new ColumnSeries3D([
+                'dataFields' => []
+            ]);
+        } else {
+            $this->series = new ColumnSeries([
+                'dataFields' => []
+            ]);
+        }
 
         foreach ($this->data[0] as $key => $value) {
             if (is_numeric($value)) {
@@ -107,7 +119,7 @@ class LineChart extends Chart
         $id = $this->options['id'];
         $var = Inflector::variablize('chart_' . $id);
 
-        $js = "var $var = am4core.create('$id', am4charts.XYChart);\n";
+        $js = "var $var = am4core.create('$id', am4charts.XYChart" . ($this->is3D ? '3D' : '') . ");\n";
         if (isset($this->data)) {
             $js .= "$var.data = " . Json::htmlEncode($this->data) . ";\n";
         } else {
