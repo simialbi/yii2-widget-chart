@@ -68,10 +68,15 @@ class PieChart extends Chart
         ChartAsset::register($this->view);
         $id = $this->options['id'];
         $var = Inflector::variablize('chart_' . $id);
-        $data = Json::htmlEncode($this->data);
 
         $js = "var $var = am4core.create('$id', am4charts.PieChart);\n";
-        $js .= "$var.data = $data;\n";
+        if (isset($this->data)) {
+            $js .= "$var.data = " . Json::htmlEncode($this->data) . ";\n";
+        } else {
+            foreach ($this->dataSource as $key => $value) {
+                $js .= "$var.dataSource.$key = " . Json::htmlEncode($value) . "\n;";
+            }
+        }
 
         if (is_object($this->series) || ArrayHelper::isAssociative($this->series)) {
             $this->series = [$this->series];
