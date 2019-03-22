@@ -6,6 +6,7 @@
 
 namespace simialbi\yii2\chart\models;
 
+use simialbi\yii2\chart\models\geometry\RoundedRectangle;
 use simialbi\yii2\chart\models\style\Color;
 use simialbi\yii2\chart\models\style\LinearGradient;
 use simialbi\yii2\chart\models\style\Pattern;
@@ -159,6 +160,11 @@ class Sprite extends BaseObject
      * @var string
      */
     public $baseId;
+
+    /**
+     * @var RoundedRectangle An element to use as container background.
+     */
+    public $background;
 
     /**
      * @var boolean Indicates if the element is clickable.
