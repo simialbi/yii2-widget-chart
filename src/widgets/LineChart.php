@@ -128,9 +128,16 @@ class LineChart extends Chart
             }
         }
 
-        foreach ($this->axes as $axis) {
+        foreach ($this->axes as $key => $axis) {
             $axis->variableParent = $var;
             $js .= "var {$axis->varName} = " . (string)$axis . ';';
+            if ($key === 'x') {
+                $js .= "$var.xAxes.push({$axis->varName});\n";
+                continue;
+            } elseif ($key === 'y') {
+                $js .= "$var.yAxes.push({$axis->varName});\n";
+                continue;
+            }
             if ($axis instanceof CategoryAxis || $axis instanceof DateAxis) {
                 $js .= "$var.xAxes.push({$axis->varName});\n";
             } else {
