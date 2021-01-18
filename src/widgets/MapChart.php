@@ -38,9 +38,9 @@ class MapChart extends Chart
     public $projection;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function registerPlugin($pluginName = null)
+    public function registerPlugin($pluginName = null, $selector = null)
     {
         $asset = MapChartGeodataAsset::register($this->view);
         $asset->js = [$this->geodata . '.js'];
@@ -48,7 +48,11 @@ class MapChart extends Chart
         $id = $this->options['id'];
         $var = Inflector::variablize('chart_' . $id);
 
-        $js = "var $var = am4core.create('$id', am4maps.MapChart);\n";
+        if (empty($selector)) {
+            $selector = $id;
+        }
+
+        $js = "var $var = am4core.create('$selector', am4maps.MapChart);\n";
         if ($this->projection) {
             $js .= "$var.projection = {$this->projection};";
         }

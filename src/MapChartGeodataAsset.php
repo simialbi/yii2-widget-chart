@@ -11,24 +11,24 @@ use simialbi\yii2\web\AssetBundle;
 class MapChartGeodataAsset extends AssetBundle
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $sourcePath = null;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $baseUrl = 'https://www.amcharts.com/lib/4/geodata';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $js = [
         'worldLow.js'
     ];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $depends = [
         'simialbi\yii2\chart\MapChartAsset'

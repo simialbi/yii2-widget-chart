@@ -29,7 +29,7 @@ class Chart extends Widget
     public $dataSource;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * @throws \ReflectionException
      * @throws InvalidConfigException
      */
@@ -48,7 +48,7 @@ class Chart extends Widget
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function run()
     {

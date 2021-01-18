@@ -24,7 +24,7 @@ class PieChart extends Chart
     public $series;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * @throws InvalidConfigException
      */
     public function init()
@@ -61,15 +61,19 @@ class PieChart extends Chart
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function registerPlugin($pluginName = null)
+    public function registerPlugin($pluginName = null, $selector = null)
     {
         ChartAsset::register($this->view);
         $id = $this->options['id'];
         $var = Inflector::variablize('chart_' . $id);
 
-        $js = "var $var = am4core.create('$id', am4charts.PieChart);\n";
+        if (empty($selector)) {
+            $selector = $id;
+        }
+
+        $js = "var $var = am4core.create('$selector', am4charts.PieChart);\n";
         if (isset($this->data)) {
             $js .= "$var.data = " . Json::htmlEncode($this->data) . ";\n";
         } else {

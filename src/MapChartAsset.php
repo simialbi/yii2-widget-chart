@@ -9,7 +9,7 @@ namespace simialbi\yii2\chart;
 class MapChartAsset extends ChartAsset
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public $js = [
         'core.js',

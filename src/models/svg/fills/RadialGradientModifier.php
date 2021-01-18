@@ -9,7 +9,7 @@ namespace simialbi\yii2\chart\models\svg\fills;
 use simialbi\yii2\chart\models\style\RadialGradient;
 
 /**
- * {@inheritdoc}
+ * {@inheritDoc}
  * @package simialbi\yii2\chart\models\svg\fills
  */
 class RadialGradientModifier extends GradientModifier

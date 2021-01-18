@@ -29,7 +29,7 @@
     "php": ">=5.6",
     "ext-json": "*",
     "yiisoft/yii2": "^2.0.13",
-    "simialbi/yii2-simialbi-base": ">=0.5 <1.0 | ^1.0.0"
+    "simialbi/yii2-simialbi-base": ">=0.10.2 <1.0 | ^1.0.0"
   },
   "require-dev": {
     "yiisoft/yii2-coding-standards": "~2.0",

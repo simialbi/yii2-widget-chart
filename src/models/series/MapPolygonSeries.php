@@ -20,7 +20,7 @@ class MapPolygonSeries extends MapSeries
 
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      * @throws \ReflectionException
      */
     public function getExpression()

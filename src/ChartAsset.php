@@ -53,7 +53,7 @@ class ChartAsset extends AssetBundle
     ];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function init()
     {
