@@ -1,56 +1,59 @@
 {
-  "name": "simialbi/yii2-widget-chart",
-  "description": "Chart implementation of amcharts for yii2 framework",
-  "keywords": [
-    "yii2",
-    "amcharts",
-    "charts"
-  ],
-  "type": "yii2-extension",
-  "license": "MIT",
-  "support": {
-    "issues": "https://github.com/simialbi/yii2-widget-chart/issues",
-    "source": "https://github.com/simialbi/yii2-widget-chart"
-  },
-  "authors": [
-    {
-      "name": "Simon Karlen",
-      "email": "simi.albi@outlook.com"
+    "name": "simialbi/yii2-widget-chart",
+    "description": "Chart implementation of amcharts for yii2 framework",
+    "keywords": [
+        "yii2",
+        "amcharts",
+        "charts"
+    ],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/simialbi/yii2-widget-chart/issues",
+        "source": "https://github.com/simialbi/yii2-widget-chart"
+    },
+    "authors": [
+        {
+            "name": "Simon Karlen",
+            "email": "simi.albi@outlook.com"
+        }
+    ],
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "yiisoft/yii2": "^2.0.13",
+        "simialbi/yii2-simialbi-base": ">=0.13.0 <1.0 | ^1.0.0"
+    },
+    "require-dev": {
+        "yiisoft/yii2-coding-standards": "~2.0",
+        "phpunit/phpunit": "^9.5.21"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "simialbi\\yii2\\chart\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "yiiunit\\extensions\\chart\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
     }
-  ],
-  "prefer-stable": true,
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
-  "require": {
-    "php": ">=5.6",
-    "ext-json": "*",
-    "yiisoft/yii2": "^2.0.13",
-    "simialbi/yii2-simialbi-base": ">=0.10.2 <1.0 | ^1.0.0"
-  },
-  "require-dev": {
-    "yiisoft/yii2-coding-standards": "~2.0",
-    "phpunit/phpunit": "<7"
-  },
-  "config": {
-    "process-timeout": 1800
-  },
-  "autoload": {
-    "psr-4": {
-      "simialbi\\yii2\\chart\\": "src"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "yiiunit\\extensions\\chart\\": "tests"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0.x-dev"
-    }
-  }
 }

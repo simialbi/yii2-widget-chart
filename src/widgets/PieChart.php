@@ -27,7 +27,7 @@ class PieChart extends Chart
      * {@inheritDoc}
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -47,7 +47,7 @@ class PieChart extends Chart
     /**
      * Auto generate axes
      */
-    protected function generateSeries()
+    protected function generateSeries(): void
     {
         $this->series = new PieSeries();
 
@@ -63,7 +63,7 @@ class PieChart extends Chart
     /**
      * {@inheritDoc}
      */
-    public function registerPlugin($pluginName = null, $selector = null)
+    public function registerPlugin(?string $pluginName = null, ?string $selector = null)
     {
         ChartAsset::register($this->view);
         $id = $this->options['id'];

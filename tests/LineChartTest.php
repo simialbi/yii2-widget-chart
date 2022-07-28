@@ -16,7 +16,7 @@ use Yii;
  */
 class LineChartTest extends TestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->mockWebApplication();
@@ -31,8 +31,8 @@ class LineChartTest extends TestCase
         $output = $this->app->view->render('@webroot/views/line-chart/simple-chart');
 
         $this->assertArrayHasKey(ChartAsset::class, $this->app->view->assetManager->bundles);
-        $this->assertContains('<div id="w0" class="sa-widget-chart"></div>', $output);
-        $this->assertContains('am4core.useTheme(am4themes_', $output);
+        $this->assertStringContainsString('<div id="w0" class="sa-widget-chart"></div>', $output);
+        $this->assertStringContainsString('am4core.useTheme(am4themes_', $output);
     }
 
     /**
@@ -44,7 +44,7 @@ class LineChartTest extends TestCase
         BaseObject::$counter = 0;
         $output = $this->app->view->render('@webroot/views/line-chart/inheritance');
 
-        $this->assertContains('scrollbarSaCo0.parent = chartW0.bottomAxesContainer', $output);
+        $this->assertStringContainsString('scrollbarSaCo3.parent = chartW0.bottomAxesContainer', $output);
     }
 
     /**

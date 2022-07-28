@@ -57,7 +57,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * The PHP magic function converting an object into a string.
      * @return string the JavaScript expression.
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->expression;
     }
@@ -66,7 +66,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * Expression property getter
      * @throws \ReflectionException
      */
-    public function getExpression()
+    public function getExpression(): string
     {
         $className = StringHelper::basename(static::class);
         $r = new \ReflectionClass($this);
@@ -102,7 +102,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * Return the variable name of the object
      * @return string
      */
-    public function getVarName()
+    public function getVarName(): string
     {
         $className = StringHelper::basename(static::class);
         return Inflector::variablize($className . '_' . $this->id);
@@ -130,7 +130,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * Parent property getter
      * @return string
      */
-    public function getVariableParent()
+    public function getVariableParent(): string
     {
         return $this->_variableParent;
     }
@@ -139,7 +139,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * Parent property setter
      * @param string $parent
      */
-    public function setVariableParent($parent)
+    public function setVariableParent(string $parent)
     {
         $this->_variableParent = $parent;
     }
@@ -149,7 +149,7 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
      * @param bool $autoGenerate whether to generate an ID if it is not set previously
      * @return string ID of the object.
      */
-    public function getId($autoGenerate = true)
+    public function getId(bool $autoGenerate = true): string
     {
         if ($autoGenerate && $this->_id === null) {
             $this->_id = static::$autoIdPrefix . static::$counter++;
@@ -161,11 +161,11 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
     /**
      * Specify data which should be serialized to JSON
      * @link https://php.net/manual/en/jsonserializable.jsonserialize.php
-     * @return mixed data which can be serialized by <b>json_encode</b>,
+     * @return JsExpression data which can be serialized by <b>json_encode</b>,
      * which is a value of any type other than a resource.
      * @since 5.4.0
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): JsExpression
     {
         return new JsExpression($this->expression);
     }

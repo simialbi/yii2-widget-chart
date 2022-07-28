@@ -46,7 +46,7 @@ class LineChart extends Chart
      * {@inheritDoc}
      * @throws InvalidConfigException
      */
-    public function init()
+    public function init(): void
     {
         parent::init();
 
@@ -69,7 +69,7 @@ class LineChart extends Chart
     /**
      * Auto generate axes
      */
-    protected function generateAxes()
+    protected function generateAxes(): void
     {
         $this->axes = [];
 
@@ -89,7 +89,7 @@ class LineChart extends Chart
     /**
      * Auto generate axes
      */
-    protected function generateSeries()
+    protected function generateSeries(): void
     {
         if ($this->is3D) {
             $this->series = new ColumnSeries3D([
@@ -113,7 +113,7 @@ class LineChart extends Chart
     /**
      * {@inheritDoc}
      */
-    public function registerPlugin($pluginName = null, $selector = null)
+    public function registerPlugin(?string $pluginName = null, ?string $selector = null)
     {
         ChartAsset::register($this->view);
         $id = $this->options['id'];

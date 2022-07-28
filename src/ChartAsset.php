@@ -6,7 +6,6 @@
 
 namespace simialbi\yii2\chart;
 
-
 use simialbi\yii2\web\AssetBundle;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -55,7 +54,7 @@ class ChartAsset extends AssetBundle
     /**
      * {@inheritDoc}
      */
-    public function init()
+    public function init(): void
     {
         $themeFile = Yii::getAlias($this->sourcePath . '/themes/' . $this->theme . '.js');
         if (file_exists($themeFile)) {

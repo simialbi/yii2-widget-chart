@@ -67,7 +67,10 @@ class Color extends BaseObject
      */
     public $rgba;
 
-    public function getExpression()
+    /**
+     * {@inheritDoc}
+     */
+    public function getExpression(): string
     {
         if (isset($this->hex)) {
             return static::NAME_SPACE . ".color('{$this->hex}')";
@@ -78,6 +81,6 @@ class Color extends BaseObject
             return static::NAME_SPACE . ".color('{$this->rgba}')";
         }
 
-        return static::NAME_SPACE . ".color()";
+        return static::NAME_SPACE . '.color()';
     }
 }
