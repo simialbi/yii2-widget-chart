@@ -128,9 +128,9 @@ class BaseObject extends \yii\base\BaseObject implements \JsonSerializable
 
     /**
      * Parent property getter
-     * @return string
+     * @return string|null
      */
-    public function getVariableParent(): string
+    public function getVariableParent(): ?string
     {
         return $this->_variableParent;
     }
